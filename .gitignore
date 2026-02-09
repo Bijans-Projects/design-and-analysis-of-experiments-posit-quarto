@@ -1,0 +1,53 @@
+# -----------------------------
+# Quarto
+# -----------------------------
+.quarto/
+_site/
+*.html
+*.pdf
+*.docx
+
+# -----------------------------
+# R / renv
+# -----------------------------
+.Rhistory
+.RData
+.Ruserdata
+
+# renv (keep the lockfile, ignore the library)
+renv/library/
+renv/python/
+renv/staging/
+
+# -----------------------------
+# Python (if used)
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints/
+
+# -----------------------------
+# OS / Editor noise
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
+.positsession
+
+# -----------------------------
+# Logs & temp files
+# -----------------------------
+*.log
+*.tmp
+*.swp
+
+# -----------------------------
+# Secrets
+# -----------------------------
+.env
+.env.*
+
+/.quarto/
+**/*.quarto_ipynb
