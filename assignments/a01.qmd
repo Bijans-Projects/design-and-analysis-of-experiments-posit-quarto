@@ -3,7 +3,7 @@ title: "Simulation and Computation"
 sidebar: assignments
 order: 1
 toc: true
-toc-depth: 2
+toc-depth: 3
 format: 
     html:
         code-fold: true
@@ -13,9 +13,11 @@ format:
 
 ## Setup Stuff {.unnumbered}
 
+Let's get started!
 ```{r}
-#| label: load-packages
-#| include: false
+#| lst-label: lst-a01-load-packages
+#| lst-cap: Loading Packages and R Setup
+#| output: false
 library(tidyverse)
 library(scidesignR)
 library(knitr)
@@ -26,16 +28,18 @@ library(skimr)
 set.seed(4240)
 ```
 
-## Randomization | Exercise 2.3
-::: {.exercise-instructions} 
+## Exercise 2.3 {#a01-ex-2-3}
+::: {.callout-note appearance="simple" title="Exercise Instructions"} 
 In Section 2.3, 20 patients for Example 2.5 were randomly selected from a population of 25,000.
-
-a. Explain why the probability of choosing a random sample of 20 from 25,000 is $\frac{1} {25000 \choose 20}$
-b. Use R to randomly select 4 patients from a total of 8 patients, and calculate the probability of choosing this random sample.
 :::
  
-### Probability | Exercise 2.3.a. 
-Explain why the probability of choosing a random sample of 20 from 25,000 is $\frac{1} {25000 \choose 20}$
+### (a) Simple Random Sample Probability {#a01-ex-2-3-a}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
+Explain why the probability of choosing a random sample of 20 from 25,000 is 
+$$
+\frac{1} {25000 \choose 20}
+$$
+:::
 
 Let's start with smaller population size, 6, {A, B, C, D, E, F}.
 And, let's start with a smaller sample size, 1. We can pick one of {A}, {B}, {C}, {D}, {E}, or {F}. That is, there are 6 ways to have a sample of size 1. The probability of choosing a random sample of size 1 from a population of size 6 is 1/6.
@@ -69,18 +73,24 @@ We can recognize that the number of ways to pick a sample of size r from a popul
 □
 :::
 
-### b. Use R to randomly select 4 patients from a total of 8 patients, and calculate the probability of choosing this random sample.
+### (b) Simple Random Sample Probability with R {#a01-ex-2-3-b}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
+Use R to randomly select 4 patients from a total of 8 patients, and calculate the probability of choosing this random sample.
+:::
 
+Explored with R
 ```{r}
-# Variables
+#| lst-label: lst-a01-ex-2-3-b
+#| lst-cap: Random Sample Probability
+#| output: false
+
+# Input Parameters
 populationSize <- 8
 sampleSize <- 4
 
-####################
-# Patient Population
+# Population Table
 patients <- tibble(id = 1:populationSize)
-
-# Patient Sample
+# Pick a sample
 chosenRandomSample <- patients |>
     sample_n(sampleSize)
 
@@ -90,33 +100,42 @@ numberOfRandomSamples <- choose(populationSize, sampleSize)
 # Probability of choosing this particular random sample
 probabilityOfChosenRandomSample <- (1 / numberOfRandomSamples)
 
-
-
-##################
-# Output / Display
-patients |> 
-    mutate(
-        inSample = if_else(id %in% chosenRandomSample$id, "TRUE", "FALSE")
-    ) |> 
-    kbl(caption="Patient Population") |> 
-    kable_styling()
-
-probabilityOfChosenRandomSample
-
+# Results
+probabilityOfChosenRandomSampleRounded <- round(probabilityOfChosenRandomSample, 3)
+probabilityOfChosenRandomSampleRounded
 
 ```
 
-The probability of choosing this random sample is $\frac{1}{70} \approx 0.014$.
+Visualized with R
+
+``` {r}
+#| label: tbl-a01-ex-2-3-b
+#| tbl-cap: Randonly Generated Sample
+
+patients |> 
+    mutate(
+        "Selected for Sample" = if_else(id %in% chosenRandomSample$id, "TRUE", "FALSE")
+    ) |> 
+    kbl() |> 
+    kable_styling()
+
+```
+
+Therefore, the probability of choosing this random sample is $\frac{1}{`{r} numberOfRandomSamples`} \approx `{r} probabilityOfChosenRandomSampleRounded`$.
 
 ::: {.end-question}
 ■
 :::
 
-## Exercise 2.4
-
+## Exercise 2.4 {#a01-ex-2-4}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
 The treatment assignment displayed in Table 2.5 is from one treatment assignment out of ${20 \choose 10}$ possible random treatment assignments.
+:::
 
-### a. R can be used to generate all possible combinations of 10 patients assigned to the treatment group using ```combn(covid_sample$id, 10)```. Use the command to generate the combinations and confirm that there are ${20 \choose 10}$ ways to generate the treatment assignments.
+### (a) All Possible Treatment Assignments {#a01-ex-2-4-a}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
+R can be used to generate all possible combinations of 10 patients assigned to the treatment group using ```combn(covid_sample$id, 10)```. Use the command to generate the combinations and confirm that there are ${20 \choose 10}$ ways to generate the treatment assignments.
+:::
 
 ```{r}
 # Variables
@@ -155,7 +174,10 @@ expectedActiveTreatmentSampleCombinationsSize
 □
 :::
 
-### b. To generate the random array of treatment assignments in Table 2.5, R was used to randomly select 10 patients for the active treatment first and then assigned the placebo to the remaining 10. We can also generate a random treatment assignment vector by randomly selecting a column from the matrix of all possible treatment assignments created in part a. In R, randomly select a column and assign the first 10 to the active treatment and the rest to the placebo. Repeat a few times and discuss whether the procedure results in random assignments as desired. (Hint: You can use ```if_else(condition, true, false)``` inside ```mutate``` to return ```true``` when ```condition``` is met and ```false``` otherwise.)
+### (b) Treatment Counts Under Complete Randomization {#a01-ex-2-4-b}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
+To generate the random array of treatment assignments in Table 2.5, R was used to randomly select 10 patients for the active treatment first and then assigned the placebo to the remaining 10. We can also generate a random treatment assignment vector by randomly selecting a column from the matrix of all possible treatment assignments created in part a. In R, randomly select a column and assign the first 10 to the active treatment and the rest to the placebo. Repeat a few times and discuss whether the procedure results in random assignments as desired. (Hint: You can use ```if_else(condition, true, false)``` inside ```mutate``` to return ```true``` when ```condition``` is met and ```false``` otherwise.)
+:::
 
 ```{r}
 # Pick a random number between 1 and the total number of combinations to choose the patients that will get the active treatment
@@ -191,7 +213,10 @@ This proceudre does result in random assignments as desired.
 □
 :::
 
-### c. Another scheme we may consider is to assign ```TRT``` or ```PLA``` to each patient with equal probabilities independently. Implement the procedure in R. Repeat a few times and discuss whether the procedure results in random assignments as desired.
+### (c) Comparison to Independent Assignment {#a01-ex-2-4-c}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
+Another scheme we may consider is to assign ```TRT``` or ```PLA``` to each patient with equal probabilities independently. Implement the procedure in R. Repeat a few times and discuss whether the procedure results in random assignments as desired.
+:::
 
 ```{r}
 
@@ -247,16 +272,14 @@ dict |>
 
 ```
 
-TODO: We can see that while this does result in random assignments, it isn't equally distributed.
-
 ::: {.end-question}
 □
 :::
 
-### d. Can you think of another procedure in R for randomly assigning 10 patients to active treatment? Implement your own procedure in R to verify the procedure results in random assignments.
-
-- Since the initial choosing of 20 names is already random, we could simply give the active treatment to the first 10 picked. (NOTE: This wouldn't work if they were already ordered ... would it?)
-- TODO: If patients are ordered by their ID, and we always choose the lowest 10 IDs, would it result in being random? duh, of course not. 
+### (d) Alternatives {#a01-ex-2-4-d}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
+Can you think of another procedure in R for randomly assigning 10 patients to active treatment? Implement your own procedure in R to verify the procedure results in random assignments.
+:::
 
 ```{r}
 covid_treatmentSamplePatients |> 
@@ -285,8 +308,8 @@ for(i in 1:1000) {
 ■
 :::
 
-## Exercise 2.11
-
+## Exercise 2.11 {#a01-ex-2-11}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
 A chemist has seven light objects to weigh on a balance pan scale. The standard deviation of each weighing is denoted by $\sigma$. In a 1935 paper, Frank Yates suggested an improved technique by weighing all seven objects together, and also weighing them in groups of three. The groups are chosen so that each object is weighed four times altogether, twice with any other object and twice without it.
 
 Let $y_1,...,y_8$ be the readings from the scale so that the equations for determining the unknown weights, $\beta_1,...,\beta_7$, are
@@ -334,8 +357,12 @@ $$
 where the $\epsilon_i,i=1,...,8$ are independent errors.
 
 Hotelling suggested modifying Yates’ procedure by placing in the other pan of the scale those of the objects not included in one of his weighings. In other words if the first three objects are to be weighed, then the remaining four objects would be placed in the opposite pan.
+:::
 
-### a. Write Yates’ procedure in matrix form and find the least squares estimates of β.
+### (a) Yates' Procedure {#a01-ex-2-11-a}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
+Write Yates’ procedure in matrix form and find the least squares estimates of β.
+:::
 
 Yates' procedure can be written using the matrix form:
 
@@ -748,7 +775,10 @@ $$
 □
 :::
 
-### b. Write Hotelling’s procedure in matrix form
+### (b) Hotelling's Procuedure {#a01-ex-2-11-b}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
+Write Hotelling’s procedure in matrix form
+:::
 
 Hotelling's procedure can be written using the matrix form:
 
@@ -808,7 +838,10 @@ $$
 □
 :::
 
-### c. Find the variance of a weight using Yates’ and Hotelling’s procedures.
+### (c) Variance Comparison {#a01-ex-2-11-c}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
+Find the variance of a weight using Yates’ and Hotelling’s procedures.
+:::
 
 As we already have
 $$
@@ -921,7 +954,10 @@ $$
 □
 :::
 
-### d. If the chemist wanted estimates of the weights with the highest precision, then which procedure (Yates or Hotelling) would you recommend that the chemist use to weigh objects? Explain your reasoning.
+### (d) Recommendation {#a01-ex-2-11-d}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
+If the chemist wanted estimates of the weights with the highest precision, then which procedure (Yates or Hotelling) would you recommend that the chemist use to weigh objects? Explain your reasoning.
+:::
 
 To keep the estimates of the objects as precise as possible, we want the procedure with the lowest variance, which would be Hotelling's. 
 
@@ -929,9 +965,10 @@ To keep the estimates of the objects as precise as possible, we want the procedu
 ■
 :::
 
-## Exercise 2.12
-
+## Exercise 2.12 {#a01-ex-2-12}
+::: {.callout-note appearance="simple" title="Exercise Instructions"}
 Does life satisfaction change by region over time? Use the lifesat_childmort data from Example 2.15 to explore this question.
+:::
 
 ``` {r}
 #| label: Quick audit (raw data)
@@ -1033,7 +1070,7 @@ summary(m2)
 ```
 
 
-#### Interpretation
+Interpretation
 
 In a multiple linear regression allowing continent-specific time trends, none of the interaction terms between Year and Continent were statistically significant. This suggests that while average levels of life satisfaction differ substantially across continents, the *rate of change over time* is broadly similar across regions. Overall, life satisfaction appears relatively stable over the observed period. 
 
@@ -1043,13 +1080,9 @@ In a multiple linear regression allowing continent-specific time trends, none of
 
 
 
+## Appendix: References
+The following is best to ignore. It's code I ran and didn't end up using in the final project, but haven't removed into somewhere else ... yet. 
 
-
-
-
-
-
-OTHER STUFF TO IGNORE: 
 ``` {r}
 
 skim(lifesat_childmort)
