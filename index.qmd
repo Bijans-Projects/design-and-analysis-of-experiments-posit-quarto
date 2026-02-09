@@ -1,0 +1,67 @@
+---
+title: "Experimental Design"
+subtitle: "STAT 4240 · Work portfolio & learning record"
+page-layout: full
+toc: false
+---
+
+::: {.grid}
+::: {.g-col-12 .g-col-md-8}
+
+## Welcome
+
+This site is my published record of work for **STAT 4240 (Experimental Design)**.  
+It’s intentionally **transparent and verbose** — the goal is to show not only *what* I did, but *how* I thought about it.
+
+- **Assignments** are the polished deliverables
+- **Explorations** are my chapter-by-chapter notes, exercises, and experiments
+- Wherever possible, I include assumptions, diagnostics, and interpretations in plain language
+
+:::
+
+::: {.g-col-12 .g-col-md-4}
+
+::: {.card}
+### Quick links
+- ✅ [Assignments](assignments/)
+- 🔍 [Explorations](explorations/)
+
+---
+
+### About
+**Author:** Bijan  
+**Style:** practical · reproducible · methods-first · clear writing
+
+:::
+
+:::
+:::
+
+---
+
+## How this site is organized
+
+::: {.grid}
+::: {.g-col-12 .g-col-md-6}
+### Assignments
+Final write-ups meant to be read start-to-finish.
+
+→ [Go to Assignments](assignments/)
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### Explorations
+Learning trail: notes, attempts, and “what happens if…” tests.
+
+→ [Go to Explorations](explorations/)
+:::
+:::
+
+---
+
+## Working principles
+
+- **Reproducibility:** code + narrative + outputs in one place  
+- **Assumptions first:** what needs to be true for conclusions to be valid  
+- **Checks:** diagnostics, sensitivity, and limitations are part of the work  
+- **Clarity:** results are written for humans, not just for grading

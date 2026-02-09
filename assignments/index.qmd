@@ -1,0 +1,16 @@
+---
+title: "Assignments"
+toc: false
+---
+
+This page lists submitted work for STAT 4240. Each assignment includes the final write-up and (when relevant) supporting code and notes.
+
+## Index
+
+### A01 — [Title of assignment]
+- **Focus:** [e.g., linear models, diagnostics, inference]
+- **Key outputs:** [brief — 1 line]
+- **Link:** [A01](a01.qmd)
+
+### A02 — *(coming soon)*
+- **Link:** *(to be added)*

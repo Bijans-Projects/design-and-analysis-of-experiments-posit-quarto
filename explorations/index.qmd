@@ -1,0 +1,12 @@
+---
+title: "Explorations"
+toc: false
+---
+
+These are my chapter-by-chapter notes and practice work. They are more informal than the assignments, and may include partial attempts, side experiments, and quick checks.
+
+## Chapters / Topics
+
+- Chapter 1 — *(coming soon)*
+- Chapter 2 — *(coming soon)*
+- Chapter 3 — *(coming soon)*

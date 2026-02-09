@@ -1,0 +1,11 @@
+/* css styles */
+.end-question {
+  margin: 2em 0;
+  position: relative;
+  display: block;
+  text-align: right;
+  font-size: 1.5em;
+}
+body {
+    outline: 5px solid red;
+}
